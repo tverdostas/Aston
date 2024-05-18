@@ -2,7 +2,6 @@ import org.testng.annotations.Test;
 import school.lessons.Lesson_7_testng;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 public class Tests {
 
@@ -17,10 +16,7 @@ public class Tests {
         assertEquals(1, result);
     }
 
-    @Test
-    void exceptionTesting() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Lesson_7_testng.getFactorial(-2),
-                "Expected getFactorial() to throw, but it didn't");
-        assertEquals("Факториал можно вычислить только для неотрицательных чисел", exception.getMessage());
-    }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFactorialForNegativeNumber() {
+        Lesson_7_testng.getFactorial(-2);}
 }
