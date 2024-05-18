@@ -1,4 +1,5 @@
 import org.testng.annotations.Test;
+import school.lessons.Lesson_7_testng;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertThrows;
