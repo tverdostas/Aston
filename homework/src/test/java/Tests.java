@@ -18,7 +18,8 @@ public class Tests {
 
     @Test
     void exceptionTesting() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Lesson_7_junit_5.getFactorial(-2), "Expected getFactorial() to throw, but it didn't");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> Lesson_7_junit_5.getFactorial(-2),
+                "Expected getFactorial() to throw, but it didn't");
         assertEquals("Факториал можно вычислить только для неотрицательных чисел", exception.getMessage());
     }
     }
