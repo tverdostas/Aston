@@ -64,12 +64,12 @@ import java.util.ArrayList;
 
 public class Phonebook {
 
-    // Mapping of surnames to their corresponding phone numbers
+    // Map для фамилий и номеров телефона
     private final HashMap<String, List<String>> contacts;
 
     // Конструктор для Phonebook
     public Phonebook() {
-        // Инициализируем пустой мап
+        // Инициализируем пустой map
         this.contacts = new HashMap<>();
     }
 
@@ -79,12 +79,12 @@ public class Phonebook {
 
     // Добавление новой записи в телефонный справочник
     public void add(String surname, String phone_number) {
-        // Проверка на presence surname in the map
-/*        if (!this.contacts.containsKey(surname)) {
+        // Проверка на наличие фамилии в map
+        if (!this.contacts.containsKey(surname)) {
             // Если его нет, создается новый список и добавляется под фамилией
             this.contacts.put(surname, new ArrayList<>());
         }
-        this.contacts.get(surname).add(phone_number);*/
+        this.contacts.get(surname).add(phone_number);
         this.contacts.put(surname, new ArrayList<>());
     }
 

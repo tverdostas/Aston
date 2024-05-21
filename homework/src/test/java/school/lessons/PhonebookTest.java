@@ -9,17 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PhonebookTest {
 
-    // проверка пустого телефонного справочника
-    @Test
-    @DisplayName("проверка пустого телефонного справочника")
+      @Test
+    @DisplayName("Проверка пустого телефонного справочника")
     public void testEmptyPhonebook() {
         Phonebook phonebook = new Phonebook();
         assertTrue(phonebook.getContacts().isEmpty(), "Телефонный справочник должен быть пустым");
     }
 
-    // тестирование добавления контакта
     @Test
-    @DisplayName("тестирование добавления контакта")
+    @DisplayName("Тестирование добавления контакта")
     public void testAddContact() {
         Phonebook phonebook = new Phonebook();
         String surname = "Иванов";
@@ -32,9 +30,8 @@ class PhonebookTest {
         assertTrue(phone_numbers.contains(phone_number1), "Номер телефона должен быть в списке");
     }
 
-    // проверка добавления нескольких контактов с одним фамилией
     @Test
-    @DisplayName("проверка добавления нескольких контактов с одним фамилией")
+    @DisplayName("Проверка добавления нескольких контактов с одной фамилией")
     public void testAddMultipleContactsSameSurname() {
         Phonebook phonebook = new Phonebook();
         String surname = "Петров";
@@ -51,7 +48,6 @@ class PhonebookTest {
         assertTrue(phone_numbers.contains(phone_number2), "Второй номер телефона должен быть в списке");
     }
 
-    // проверка поиска контакта по фамилии
     @Test
     @DisplayName("проверка поиска контакта по фамилии")
     public void testGetContactBySurname() {
