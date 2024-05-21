@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,8 +21,7 @@ public class MtsTests {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(10000,
-                TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(120));
         driver.get("https://www.mts.by/");
 
         WebElement cookieAgree = driver.findElement(By.id("cookie-agree"));
@@ -57,6 +56,45 @@ public class MtsTests {
 
         WebElement maestroLogo = paymentPartnersBlock.findElement(By.xpath("//img[@alt='Белкарт']"));
         assertTrue(maestroLogo.isDisplayed());
+    }
+
+    @Test
+    @Description("Ссылка «Подробнее о сервисе» работает")
+    public void linkIsWorking() {
+        WebElement link = driver.findElement(By.linkText("Подробнее о сервисе"));
+        String expectedUrl = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
+
+        link.click();
+
+        String actualText = driver.findElement(By.xpath("//h3[contains(text(), 'Оплата банковской картой')]")).getText();
+        String expectedText = "Оплата банковской картой";
+
+        assertEquals(expectedText, actualText, "Текст не отображается корректно на странице");
+
+        String currentUrl = driver.getCurrentUrl();
+        assertEquals(expectedUrl, currentUrl, "URL не совпадает с ожидаемым");
+    }
+
+    @Test
+    @Description("Ссылка «Подробнее о сервисе» работает")
+    public void buttonIsWorking() {
+        WebElement phoneNumber = driver.findElement(By.xpath("//input[@id='connection-phone']"));
+        phoneNumber.click();
+        phoneNumber.sendKeys("297777777");
+
+        WebElement sum = driver.findElement(By.xpath("//input[@id='connection-sum']"));
+        sum.click();
+        sum.sendKeys("100");
+
+        WebElement buttonContinue = driver.findElement(By.xpath("//button[contains(text(), 'Продолжить')]"));
+        buttonContinue.click();
+
+        WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
+        driver.switchTo().frame(frameElement);
+
+        WebElement fieldTextPayment = driver.findElement(By.xpath("//span[contains(text(), 'Оплата')]"));
+        assertTrue(fieldTextPayment.isDisplayed());
+
     }
 
     @AfterAll
