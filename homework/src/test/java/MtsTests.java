@@ -60,6 +60,7 @@ public class MtsTests {
 
     @Test
     @Description("Ссылка «Подробнее о сервисе» работает")
+    // В данном тесте использовала две проверки, хотя в теории должно быть один тест = одной проверке
     public void linkIsWorking() {
         WebElement link = driver.findElement(By.linkText("Подробнее о сервисе"));
         String expectedUrl = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
@@ -69,10 +70,10 @@ public class MtsTests {
         String actualText = driver.findElement(By.xpath("//h3[contains(text(), 'Оплата банковской картой')]")).getText();
         String expectedText = "Оплата банковской картой";
 
-        assertEquals(expectedText, actualText, "Текст не отображается корректно на странице");
+        assertEquals(expectedText, actualText, "Текст не отображается корректно на странице"); // проверяю, что на странице есть текст, так можно понять что открылась другая страница
 
         String currentUrl = driver.getCurrentUrl();
-        assertEquals(expectedUrl, currentUrl, "URL не совпадает с ожидаемым");
+        assertEquals(expectedUrl, currentUrl, "URL не совпадает с ожидаемым"); // вторая проверка, что перешли именно на нужную страницу
     }
 
     @Test
@@ -90,10 +91,10 @@ public class MtsTests {
         buttonContinue.click();
 
         WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
-        driver.switchTo().frame(frameElement);
+        driver.switchTo().frame(frameElement); // переключение на модальное окно
 
         WebElement fieldTextPayment = driver.findElement(By.xpath("//span[contains(text(), 'Оплата')]"));
-        assertTrue(fieldTextPayment.isDisplayed());
+        assertTrue(fieldTextPayment.isDisplayed()); // проверяю, что отображен текст в модальном окне - значит, модалка открыта
 
     }
 
