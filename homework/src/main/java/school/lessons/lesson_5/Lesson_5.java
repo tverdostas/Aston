@@ -64,6 +64,4 @@ public class Lesson_5 {
             super(message);
         }
     }
-
-
 }
