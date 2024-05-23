@@ -17,7 +17,7 @@ public class Tests {
     String paramKey4 = "bar4";
     String paramValue5 = "foo5";
     String paramKey5 = "";
-    String paramKey5Replace = "";
+    String paramKey5Replace = "bar5";
 
     @BeforeAll
     public static void setUp() {
