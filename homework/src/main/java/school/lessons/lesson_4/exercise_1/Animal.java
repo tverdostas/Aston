@@ -1,18 +1,33 @@
 package school.lessons.lesson_4.exercise_1;
 
-public class Animal {
-    // Подсчет созданных животных
-    public Animal() {
-        totalAnimals++;
+abstract public class Animal {
+    protected static int count;
+    protected String name;
+    protected int limitSwim;
+    protected int limitRun;
+
+    public Animal(String name) {
+        count++;
+        this.name = name;
     }
 
-    public static int totalAnimals = 0; // изменила модификатор доступа на public, чтобы не добавлять геттер
-    public static int totalCats = 0; // изменила модификатор доступа на public, чтобы не добавлять геттер
-    public static int totalDogs = 0; // изменила модификатор доступа на public, чтобы не добавлять геттер
-
-    public void run(int dist) {
+    public static int getCount() {
+        return count;
     }
 
-    public void swim(int dist) {
+    public void run(int distance) {
+        if (limitRun >= distance) {
+            System.out.println(name + " пробежал " + distance + " метров");
+        } else {
+            System.out.println(name + " может пробежать только " + limitRun + " метров");
+        }
     }
-}
+
+    public void swim(int distance) {
+        if (limitSwim >= distance) {
+            System.out.println(name + " проплыл " + distance + " метров");
+        } else {
+            System.out.println(name + " может проплыть только " + limitSwim + " метров");
+        }
+    }
+    }
