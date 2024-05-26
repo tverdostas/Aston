@@ -3,6 +3,9 @@ package school.lessons.lesson_4;
 import school.lessons.lesson_4.exercise_1.Bowl;
 import school.lessons.lesson_4.exercise_1.Cat;
 import school.lessons.lesson_4.exercise_1.Dog;
+import school.lessons.lesson_4.exercise_2.Circle;
+import school.lessons.lesson_4.exercise_2.Rectangle;
+import school.lessons.lesson_4.exercise_2.Triangle;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,22 +24,36 @@ public class Main {
         dog.swim(10);
         dog.swim(11);
 
-        // Добавим еды в миску
-/*        Bowl.addFood(2);
-        bowl.feedCat(cat1, 1);*/
-
        System.out.println("Всего животных: " + (Cat.getCount() + Dog.getCount()));
         System.out.println("Котов создано: " + Cat.getCount());
         System.out.println("Собак создано: " + Dog.getCount());
 
         Cat[] catsArray = new Cat[3];
-        catsArray[0] = new Cat("Пушок3", 17);
-        catsArray[1] = new Cat("Пушок4", 20);
-        catsArray[2] = new Cat("Пушок5", 15);
+        catsArray[0] = new Cat("Барсик", 17);
+        catsArray[1] = new Cat("Белка", 20);
+        catsArray[2] = new Cat("Шанти", 15);
 
         Bowl bowl1 = new Bowl();
         for (int i = 0; i < catsArray.length; i++){
             catsArray[i].eatFood(bowl1);
         }
+
+        // Добавим еды в миску
+        bowl1.addFood(78);
+        Cat cat2 = new Cat("Пухлик", 102);
+        cat2.eatFood(bowl1);
+
+        // Задание 2
+        Circle circle = new Circle(10);
+        circle.setColor("Желтый", "Оранжевый");
+        circle.printInfo();
+
+        Rectangle rectangle = new Rectangle(5, 6);
+        rectangle.setColor("Синий", "Голубой");
+        rectangle.printInfo();
+
+        Triangle triangle = new Triangle(9, 9, 11);
+        triangle.setColor("Фиолетовый", "Бирюзовый");
+        triangle.printInfo();
     }
 }

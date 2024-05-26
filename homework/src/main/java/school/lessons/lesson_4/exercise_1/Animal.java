@@ -11,10 +11,6 @@ abstract public class Animal {
         this.name = name;
     }
 
-    public static int getCount() {
-        return count;
-    }
-
     public void run(int distance) {
         if (limitRun >= distance) {
             System.out.println(name + " пробежал " + distance + " метров");
