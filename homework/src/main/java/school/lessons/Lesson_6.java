@@ -2,8 +2,6 @@ package school.lessons;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
-
 public class Lesson_6 {
     // Слова сгенерированы рандомайзером
         public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class Lesson_6 {
                 "Смущать",
                 "Стаять",
                 "Ух",
-                "Фронт",
+                "Авокадо",
                 "Затушевка",
                 "Крупноплодный",
                 "Орехоплодный",
@@ -35,25 +33,27 @@ public class Lesson_6 {
         System.out.println("Исходный список:");
         randomNonUniqueStringsList.forEach(System.out::println);
 
-        List<String> randomUniqueStrings = randomNonUniqueStringsList.stream()
-                .distinct() // уникальные элементы
-                .sorted() // сортировка, чтобы проще было заметить дубли
-                .collect(toList());
+            Set<String> randomUniqueStrings = new HashSet<>(randomNonUniqueStringsList);
 
-        System.out.println("\n\nСписок уникальных значений:");
-        randomUniqueStrings.forEach(System.out::println);
+            System.out.println("\n\nСписок уникальных значений:" + randomUniqueStrings);
 
-        Map<String, Integer> elementsOccurrences = new HashMap<>();
-        randomUniqueStrings.forEach(e -> elementsOccurrences.put(e, Collections.frequency(randomNonUniqueStringsList, e)));
-        for (String elem : randomNonUniqueStringsList) {
-            if (elementsOccurrences.containsKey(elem)) {
-                elementsOccurrences.put(elem, elementsOccurrences.get(elem) + 1);
-            } else {
-                elementsOccurrences.put(elem, 1);
-            }
-        }
+            Map<String, Integer> elementsOccurrences = new HashMap<>();
+            randomUniqueStrings.forEach(e -> elementsOccurrences.put(e, Collections.frequency(randomNonUniqueStringsList, e)));
 
-        System.out.println("\n\nПодсчет элементов:");
-        elementsOccurrences.forEach((key, value) -> System.out.println(key + ": " + value));
+            System.out.println("\n\nПодсчет элементов:");
+            elementsOccurrences.forEach((key, value) -> System.out.println(key + ": " + value));
+
+            Phonebook phonebook = new Phonebook();
+            phonebook.add("Иванов", "+7 953 123-45-67");
+            phonebook.add("Иванов", "+7 953 123-45-68");
+            phonebook.add("Иванов", "+7 953 123-45-69");
+            phonebook.add("Иванов", "+7 953 123-45-70");
+            phonebook.add("Петров", "+7 953 123-45-71");
+            phonebook.add("Петров", "+7 953 123-45-71");
+            phonebook.add("Петров", "+7 953 123-45-72");
+            phonebook.add("Сидоров", "+7 953 123-45-72");
+            phonebook.add("Сидоров", "+7 953 123-45-74");
+
+            phonebook.printPhoneBook();
     }
 }
