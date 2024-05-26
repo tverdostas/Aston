@@ -20,17 +20,22 @@ public class Phonebook {
         return contacts;
     }
 
-    // Добавление новой записи в телефонный справочник
     public void add(String surname, String phoneNumber) {
-        // Проверка на наличие фамилии в map
+        // Проверка наличия фамилии в map
         if (contacts.containsKey(surname)) {
             List<String> numbers = contacts.get(surname);
-            numbers.add(phoneNumber);
+            // Проверка наличия номера телефона в списке для данной фамилии
+            if (!numbers.contains(phoneNumber)) {
+                numbers.add(phoneNumber);
+                contacts.put(surname, numbers);
+            } else {
+                System.out.println("Номер телефона " + phoneNumber + " уже есть в списке для фамилии " + surname);
+            }
         } else {
             List<String> numbers = new ArrayList<>();
             numbers.add(phoneNumber);
             contacts.put(surname, numbers);
-    }
+        }
     }
 
     // Поиск телефонного номера по фамилии

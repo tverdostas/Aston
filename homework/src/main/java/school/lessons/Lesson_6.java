@@ -48,7 +48,7 @@ public class Lesson_6 {
             phonebook.add("Иванов", "+7 953 123-45-68");
             phonebook.add("Иванов", "+7 953 123-45-69");
             phonebook.add("Иванов", "+7 953 123-45-70");
-            phonebook.add("Петров", "+7 953 123-45-71");
+            phonebook.add("Петров", "+7 953 123-45-60");
             phonebook.add("Петров", "+7 953 123-45-71");
             phonebook.add("Петров", "+7 953 123-45-72");
             phonebook.add("Сидоров", "+7 953 123-45-72");
