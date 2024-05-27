@@ -1,13 +1,11 @@
 package school.lessons.lesson_4.exercise_1;
 
-abstract public class Animal {
-    protected static int count;
+abstract class Animal {
     protected String name;
     protected int limitSwim;
     protected int limitRun;
 
     public Animal(String name) {
-        count++;
         this.name = name;
     }
 
@@ -26,4 +24,4 @@ abstract public class Animal {
             System.out.println(name + " может проплыть только " + limitSwim + " метров");
         }
     }
-    }
+}

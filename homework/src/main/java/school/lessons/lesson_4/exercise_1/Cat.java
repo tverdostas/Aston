@@ -1,32 +1,18 @@
 package school.lessons.lesson_4.exercise_1;
 
 public class Cat extends Animal {
-    private static int count; // счетчик созданных котов
     int foodToEat;
-    private boolean isFull; // поменяла модификатор доступа
+    private boolean isFull = false; // поменяла модификатор доступа
 
-    public Cat(String name, int foodToEat) {
+    protected Cat(String name, int foodToEat) {
         super(name);
         this.limitRun = 200;
         this.foodToEat = foodToEat;
-        count++;
-    }
-
-    public Cat(String name, int foodToEat, boolean isFull) {
-        super(name);
-        this.limitRun = 200;
-        this.foodToEat = foodToEat;
-        this.isFull = false;
-        count++;
-    }
-
-    public static int getCount() {
-        return count;
     }
 
     public void eatFood(Bowl bowl){
         if (!isFull && foodToEat <= bowl.getFood()){
-            bowl.setFood(bowl.getFood() - foodToEat);
+            bowl.ateFood(foodToEat);
             isFull = true;
             System.out.println("Кот " + name + " съел " + foodToEat + " . В миске осталось " + bowl.getFood());
             System.out.println("Кот поел и он не голоден, сытость " + getIsFull());
@@ -40,5 +26,13 @@ public class Cat extends Animal {
     // чтобы только определенный экземпляр мог работать с сытостью кота, создаю метод
     public boolean getIsFull() {
         return this.isFull;
+    }
+
+    /**
+     * Кот не умеет плавать
+     */
+    @Override
+    public void swim(int distance) {
+        System.out.println();
     }
 }
