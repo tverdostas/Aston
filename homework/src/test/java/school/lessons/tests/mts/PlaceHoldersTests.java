@@ -1,55 +1,62 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import jdk.jfr.Description;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+package school.lessons.tests.mts;
+
+
+import io.qameta.allure.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
-
+import static common.ChromeSettings.driver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlaceHoldersTests {
-    static WebDriver driver;
+
  /*   String sumText = driver.findElement(By.cssSelector("#connection-sum")).getAttribute("placeholder");
     String sumTextExpected = "Сумма";
 
     String emailText = driver.findElement(By.cssSelector("#connection-email")).getAttribute("placeholder");
     String emailTextExpected = "E-mail для отправки чека";*/
 
-    @BeforeEach
-    void setupClass() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(120));
-        driver.get("https://www.mts.by/");
-
-        WebElement cookieAgree = driver.findElement(By.id("cookie-agree"));
-        cookieAgree.click();
+    @AfterEach
+    @Step("Закрытие браузера")
+    void AfterEach() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
-    @Description("Плейсхолдеры 'Услуги связи' верные")
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
+    @Story("Плейсхолдеры 'Услуги связи' верные")
+    @Description("Плейсхолдеры 'Услуги связи' верные описание")
+    @DisplayName("Плейсхолдеры 'Услуги связи' верные")
     public void communicationServicesPlaceholdersTest() {
 
-        String phoneNumberText = driver.findElement(By.cssSelector("#connection-phone")).getAttribute("placeholder");
-        String phoneNumberExpectedText = "Номер телефона";
-        assertEquals(phoneNumberText, phoneNumberExpectedText);
+        Allure.step("Проверка номера телефона", stepContext -> {
+            String phoneNumberText = driver.findElement(By.cssSelector("#connection-phone")).getAttribute("placeholder");
+            String phoneNumberExpectedText = "Номер телефона";
 
-/*        assertEquals(sumText, sumTextExpected);
-        assertEquals(emailText, emailTextExpected);*/
+            Allure.step("Проверка", stepContext1 -> {
+                assertEquals(phoneNumberText, phoneNumberExpectedText);
+            });
+        });
 
-        driver.close();
+//        assertEquals(sumText, sumTextExpected);
+//        assertEquals(emailText, emailTextExpected);
+    }
 
-        }
     @Test
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
     @Description("Плейсхолдеры 'Домашний интернет' верные")
     public void homeInternetPlaceholdersTest() {
+        Allure.step("Нажатие на кнопку ", stepContext -> {
+            driver.findElement(By.cssSelector(".select__arrow")).click();
+        });
 
-        driver.findElement(By.cssSelector(".select__arrow")).click();
         driver.findElement(By.xpath("//li/p[contains(text(), 'Домашний интернет')]")).click();
 
         String subscriberNumberText = driver.findElement(By.cssSelector("#internet-phone")).getAttribute("placeholder");
@@ -63,6 +70,8 @@ public class PlaceHoldersTests {
     }
 
     @Test
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
     @Description("Плейсхолдеры 'Рассрочка' верные")
     public void installmentPlanPlaceholdersTest() {
         driver.findElement(By.cssSelector(".select__arrow")).click();
@@ -79,6 +88,8 @@ public class PlaceHoldersTests {
     }
 
     @Test
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
     @Description("Плейсхолдеры 'Задолженность' верные")
     public void debtPlaceholdersTest() {
         driver.findElement(By.cssSelector(".select__arrow")).click();
@@ -95,6 +106,8 @@ public class PlaceHoldersTests {
     }
 
     @Test
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
     @Description("В окне 'Услуги связи' отображаются данные из формы")
     public void iFrameCheck() {
         WebElement phoneNumber = driver.findElement(By.xpath("//input[@id='connection-phone']"));
