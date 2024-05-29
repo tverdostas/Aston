@@ -24,6 +24,10 @@ public class MtsHomePage extends BasePage {
         return phoneNumberField;
     }
 
+    public String getPlaceholderPhoneNumberField() {
+        return placeholderPhoneNumberField;
+    }
+
     private final String placeholderPhoneNumberField = "Номер телефона";
 
     public MtsHomePage findPhoneNumberField() {
@@ -31,9 +35,9 @@ public class MtsHomePage extends BasePage {
         return this;
     }
 
-    public MtsHomePage getPlaceholderPhoneNumberField() {
-        driver.findElement(phoneNumberField).getAttribute("placeholder");
-        return this;
+    public String getPlaceholderPhoneNumberFieldFromPage() {
+        String value = driver.findElement(phoneNumberField).getAttribute("placeholder");
+        return value;
     }
 
 
