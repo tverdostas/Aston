@@ -3,6 +3,7 @@ package pages.mts;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pages.base.BasePage;
 
 public class MtsHomePage extends BasePage {
@@ -30,9 +31,7 @@ public class MtsHomePage extends BasePage {
     private final String placeholderDebtSumField = "Номер счета на 2073";
     private final String placeholderAbonentNumber = "Номер абонента";
     private final By abonentNumber = By.cssSelector("#internet-phone");
-
     private final By accountNumberField = By.cssSelector("#score-instalment");
-
     private final By placeholderAccountNumber = By.cssSelector("#score-instalment");
 
     public String getPlaceholderDebtSumField() {
@@ -70,13 +69,19 @@ public class MtsHomePage extends BasePage {
         return placeholderPhoneNumberField;
     }
 
-/*    public MtsHomePage findPhoneNumberField() {
+        public MtsHomePage findPhoneNumberField() {
         driver.findElement(phoneNumberField).click();
         return this;
-    }*/
+    }
+
+    public MtsHomePage fillPhoneNumberField(String phoneNumber2) {
+        WebElement phoneNumber1 = driver.findElement(phoneNumberField);
+        phoneNumber1.sendKeys(phoneNumber2);
+        return this;
+    }
 
     @Step("Получение плейсхолдера поля Номер телефона")
-    public String getPlaceholderPhoneNumberFieldFromPage() {
+    public String readPlaceholderPhoneNumberField() {
         String value = driver.findElement(phoneNumberField).getAttribute("placeholder");
         return value;
     }
@@ -117,7 +122,7 @@ public class MtsHomePage extends BasePage {
     }*/
 
     @Step("Выбрать из выпадающего списка Домашний интернет")
-    public void findHomeInternet() {
+    public void chooseHomeInternet() {
         driver.findElement(homeInternetField).click();
     }
     @Step("Выбрать из выпадающего списка Рассрочка")

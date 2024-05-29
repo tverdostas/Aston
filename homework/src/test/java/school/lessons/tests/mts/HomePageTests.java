@@ -27,9 +27,9 @@ public class HomePageTests extends BaseTest {
 
         mtsHomePage.open(MTS_HOME_PAGE);
         mtsHomePage.clickCookieAgree();
-        mtsHomePage.getPlaceholderPhoneNumberFieldFromPage();
+        mtsHomePage.readPlaceholderPhoneNumberField();
 
-        assertEquals(mtsHomePage.getPlaceholderPhoneNumberField(), mtsHomePage.getPlaceholderPhoneNumberFieldFromPage());
+        assertEquals(mtsHomePage.getPlaceholderPhoneNumberField(), mtsHomePage.readPlaceholderPhoneNumberField());
 
         mtsHomePage.readPlaceholderSumField();
 
@@ -55,7 +55,7 @@ public class HomePageTests extends BaseTest {
         mtsHomePage.clickCookieAgree();
 
         mtsHomePage.openArrow();
-        mtsHomePage.findHomeInternet();
+        mtsHomePage.chooseHomeInternet();
 
         mtsHomePage.readPlaceholderAbonentNumber();
 
@@ -132,5 +132,18 @@ public class HomePageTests extends BaseTest {
         assertEquals(mtsHomePage.getPlaceholderEmailField(), mtsHomePage.readPlaceholderEmail());
 
         closeDriver(driver);
+    }
+
+    @Test
+    @Epic("Сайт МТС")
+    @Feature("Главная страница")
+    @Story("")
+    @Description("")
+    @DisplayName("")
+    public void iFrameCheck() {
+        MtsHomePage mtsHomePage = new MtsHomePage(driver);
+        mtsHomePage.open(MTS_HOME_PAGE);
+        mtsHomePage.clickCookieAgree();
+        mtsHomePage.findPhoneNumberField();
     }
 }
