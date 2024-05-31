@@ -7,9 +7,12 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.mts.MtsHomePage;
 import school.lessons.tests.base.BaseTest;
 
+import static common.ChromeSettings.driver;
 import static constants.Constant.TimeoutVariable.Urls.MTS_HOME_PAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static school.lessons.common.CommonActions.closeDriver;
@@ -134,16 +137,5 @@ public class HomePageTests extends BaseTest {
         closeDriver(driver);
     }
 
-    @Test
-    @Epic("Сайт МТС")
-    @Feature("Главная страница")
-    @Story("")
-    @Description("")
-    @DisplayName("")
-    public void iFrameCheck() {
-        MtsHomePage mtsHomePage = new MtsHomePage(driver);
-        mtsHomePage.open(MTS_HOME_PAGE);
-        mtsHomePage.clickCookieAgree();
-        mtsHomePage.findPhoneNumberField();
-    }
+
 }

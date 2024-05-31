@@ -33,6 +33,10 @@ public class MtsHomePage extends BasePage {
     private final By abonentNumber = By.cssSelector("#internet-phone");
     private final By accountNumberField = By.cssSelector("#score-instalment");
     private final By placeholderAccountNumber = By.cssSelector("#score-instalment");
+    // private final String userPhoneNumber = "";
+
+    private final By continueButton = By.xpath("//button[contains(text(), 'Продолжить')]");
+    private final By iFramePayment = By.xpath("//iframe[@class='bepaid-iframe']");
 
     public String getPlaceholderDebtSumField() {
         return placeholderDebtSumField;
@@ -74,11 +78,16 @@ public class MtsHomePage extends BasePage {
         return this;
     }
 
-    public MtsHomePage fillPhoneNumberField(String phoneNumber2) {
-        WebElement phoneNumber1 = driver.findElement(phoneNumberField);
-        phoneNumber1.sendKeys(phoneNumber2);
+    public MtsHomePage fillPhoneNumberField(String userPhoneNumber) {
+        driver.findElement(phoneNumberField).sendKeys(userPhoneNumber);
         return this;
     }
+
+    public MtsHomePage fillSumPaymentField(String paymentSum) {
+        driver.findElement(sumField).sendKeys(paymentSum);
+        return this;
+    }
+
 
     @Step("Получение плейсхолдера поля Номер телефона")
     public String readPlaceholderPhoneNumberField() {
@@ -159,4 +168,15 @@ public class MtsHomePage extends BasePage {
         return this;
     }
 
+    @Step("Нажать на кнопку Продолжить")
+    public MtsHomePage clickContinueButton() {
+        driver.findElement(continueButton).click();
+        return this;
+    }
+
+    @Step("Переключить фокус на модульное окно")
+    public void moveToFrame(){
+        WebElement frameElement = driver.findElement(iFramePayment);
+        driver.switchTo().frame(frameElement);
+    }
 }
