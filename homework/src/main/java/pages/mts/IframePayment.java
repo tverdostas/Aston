@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
 
-import static common.ChromeSettings.driver;
-
 public class IframePayment extends BasePage {
     public IframePayment(WebDriver driver) {
         super(driver);

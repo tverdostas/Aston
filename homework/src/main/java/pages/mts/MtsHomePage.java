@@ -16,13 +16,9 @@ public class MtsHomePage extends BasePage {
     private final By phoneNumberField = By.cssSelector("#connection-phone");
     private final By homeInternetField = By.xpath("//li/p[contains(text(), 'Домашний интернет')]");
     private final By openArrow = By.cssSelector(".select__arrow");
-    // private final By installmentPlanButtonField = By.cssSelector("#score-instalment");
     private final By debtChoice = By.xpath("//li/p[contains(text(), 'Задолженность')]");
-
     private final By installmentPlanChoice = By.xpath("//li/p[contains(text(), 'Рассрочка')]");
-
     private final By sumField = By.cssSelector("#connection-sum");
-
     private final By emailField = By.cssSelector("#connection-email");
     private final String placeholderPhoneNumberField = "Номер телефона";
     private final String placeholderEmailField = "E-mail для отправки чека";
@@ -31,10 +27,8 @@ public class MtsHomePage extends BasePage {
     private final String placeholderDebtSumField = "Номер счета на 2073";
     private final String placeholderAbonentNumber = "Номер абонента";
     private final By abonentNumber = By.cssSelector("#internet-phone");
-    private final By accountNumberField = By.cssSelector("#score-instalment");
+    private final By accountNumberField = By.cssSelector("#score-arrears");
     private final By placeholderAccountNumber = By.cssSelector("#score-instalment");
-    // private final String userPhoneNumber = "";
-
     private final By continueButton = By.xpath("//button[contains(text(), 'Продолжить')]");
     private final By iFramePayment = By.xpath("//iframe[@class='bepaid-iframe']");
 
@@ -52,10 +46,11 @@ public class MtsHomePage extends BasePage {
     public String getPlaceholderSumField() {
         return placeholderSumField;
     }
-
-
-    public By getPlaceholderAccountNumber() {
-        return placeholderAccountNumber;
+    public String getPlaceholderPhoneNumberField() {
+        return placeholderPhoneNumberField;
+    }
+    public String getPlaceholderScoreInstalmentSumField() {
+        return placeholderScoreInstalmentSumField;
     }
 
     @Step("Нажатие на Принять в окне Обработка файлов cookie")
@@ -63,14 +58,6 @@ public class MtsHomePage extends BasePage {
     public MtsHomePage clickCookieAgree() {
         driver.findElement(cookieAgree).click();
         return this;
-    }
-
-/*    public By getPhoneNumberField() {
-        return phoneNumberField;
-    }*/
-
-    public String getPlaceholderPhoneNumberField() {
-        return placeholderPhoneNumberField;
     }
 
         public MtsHomePage findPhoneNumberField() {
@@ -87,7 +74,6 @@ public class MtsHomePage extends BasePage {
         driver.findElement(sumField).sendKeys(paymentSum);
         return this;
     }
-
 
     @Step("Получение плейсхолдера поля Номер телефона")
     public String readPlaceholderPhoneNumberField() {
@@ -113,9 +99,9 @@ public class MtsHomePage extends BasePage {
         return value;
     }
 
-    @Step("Получение плейсхолдера поля Номер счёта")
+    @Step("Получение плейсхолдера поля Номер счёта на 44")
     public String readPlaceholderAccountNumber() {
-        String value = driver.findElement(accountNumberField).getAttribute("placeholder");
+        String value = driver.findElement(placeholderAccountNumber).getAttribute("placeholder");
         return value;
     }
 
@@ -124,11 +110,6 @@ public class MtsHomePage extends BasePage {
         String value = driver.findElement(accountNumberField).getAttribute("placeholder");
         return value;
     }
-
-/*    public MtsHomePage fillPhoneNumber(String phoneNumber){
-        driver.findElement(phoneNumberField).click();
-        return this;
-    }*/
 
     @Step("Выбрать из выпадающего списка Домашний интернет")
     public void chooseHomeInternet() {
@@ -142,30 +123,9 @@ public class MtsHomePage extends BasePage {
     public void chooseDebt() {
         driver.findElement(debtChoice).click();
     }
-
     @Step("Нажать на стрелку выпадающего списка услуг")
     public void openArrow() {
         driver.findElement(openArrow).click();
-    }
-
-
-/*    public MtsHomePage findInstallmentPlanField() {
-        driver.findElement(scoreInstalmentField).click();
-        return this;
-    }*/
-
-    public MtsHomePage findDebtButton() {
-        driver.findElement(debtChoice).click();
-        return this;
-    }
-
-/*    public MtsHomePage clickToFind(){
-        WebElement
-    }*/
-
-    public MtsHomePage findSumField() {
-        driver.findElement(sumField).click();
-        return this;
     }
 
     @Step("Нажать на кнопку Продолжить")
@@ -179,4 +139,7 @@ public class MtsHomePage extends BasePage {
         WebElement frameElement = driver.findElement(iFramePayment);
         driver.switchTo().frame(frameElement);
     }
+
+
+
 }

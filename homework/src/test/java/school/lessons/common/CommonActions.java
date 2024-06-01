@@ -2,19 +2,17 @@ package school.lessons.common;
 
 import constants.Constant;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static common.Config.CLEAR_COOKIES_AND_STORAGE;
-
 public class CommonActions {
     @Step("Настройка браузера")
     public static WebDriver createDriver() {
-        // Тут тоже самое, и там, дважды одно и тоже делать нельзя. Надо сделать тут и все. И возможно, вынестри
-        // ChromeSettings сюда, или если там они нужны, то оставить там их
+
         WebDriver driver = null;
 
         driver = new ChromeDriver();
@@ -33,6 +31,7 @@ public class CommonActions {
         }
     }
 
+    @AfterEach
     @Step("Закрытие браузера")
     public static void closeDriver(WebDriver driver) {
         driver.quit();

@@ -10,17 +10,16 @@ import pages.mts.IframePayment;
 import pages.mts.MtsHomePage;
 import school.lessons.tests.base.BaseTest;
 
-import static common.ChromeSettings.driver;
 import static constants.Constant.TimeoutVariable.Urls.MTS_HOME_PAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IfarmeTests extends BaseTest {
     @Test
-    @Epic("Сайт МТС")
-    @Feature("Главная страница")
-    @Story("Проверка iFrame Онлайн пополнение без комиссии")
-    @Description("Проверка iFrame Онлайн пополнение без комиссии")
-    @DisplayName("Проверка iFrame Онлайн пополнение без комиссии")
+    @Epic("UI тестирование сайта МТС")
+    @Feature("Окно 'Онлайн пополнение без комиссии'")
+    @Story("Плейсхолдеры и данные, введенные в окне на главной странице верные")
+    @Description("Позитивный кейс отображения плейсхолдеров, суммы оплаты и номера телефона")
+    @DisplayName("Плейсхолдеры, номер телефона и сумма оплаты в окне верные")
     public void iFrameCheck() {
         MtsHomePage mtsHomePage = new MtsHomePage(driver);
         mtsHomePage.open(MTS_HOME_PAGE);
