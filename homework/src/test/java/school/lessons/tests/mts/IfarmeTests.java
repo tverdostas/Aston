@@ -1,17 +1,20 @@
 package school.lessons.tests.mts;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.mts.IframePayment;
 import pages.mts.MtsHomePage;
 import school.lessons.tests.base.BaseTest;
 
-import static constants.Constant.TimeoutVariable.Urls.MTS_HOME_PAGE;
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static school.lessons.common.CommonActions.info;
+import static school.lessons.common.CommonActions.warn;
 
 public class IfarmeTests extends BaseTest {
     @Test
@@ -19,24 +22,29 @@ public class IfarmeTests extends BaseTest {
     @Feature("Окно 'Онлайн пополнение без комиссии'")
     @Story("Плейсхолдеры и данные, введенные в окне на главной странице верные")
     @Description("Позитивный кейс отображения плейсхолдеров, суммы оплаты и номера телефона")
-    @DisplayName("Плейсхолдеры, номер телефона и сумма оплаты в окне верные")
+    @DisplayName("Для полей Номер телефона и сумма оплаты плейсхолдеры верны")
     public void iFrameCheck() {
-        MtsHomePage mtsHomePage = new MtsHomePage(driver);
-        mtsHomePage.open(MTS_HOME_PAGE);
-        mtsHomePage.clickCookieAgree();
-        mtsHomePage.findPhoneNumberField();
-        mtsHomePage.fillPhoneNumberField("297777777");
-        mtsHomePage.fillSumPaymentField("100");
-        mtsHomePage.clickContinueButton();
+        info("Авторизация не нужна");
+        IframePayment iframePayment = new MtsHomePage(driver)
+            .open()
+            .clickCookieAgree()
+            .findPhoneNumberField()
+            .fillPhoneNumberField("297777777")
+            .fillSumPaymentField("100")
+            .clickContinueButton()
+            .moveToFrame()
+            .sumInFrameHeaderIsDisplayed()
+            .sumInFrameButtonIsDisplayed()
+            .phoneNumberHeaderIsDisplayed()
+            .iconsContainerIsDisplayed();
 
-        mtsHomePage.moveToFrame();
+        Allure.step("Ожидание прогрузки полей окна", stepContext -> {
+            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(d -> iframePayment.readPlaceholderCardNumber().equals(iframePayment.getCardNumberFrameTextExpected()));
+        });
 
-        IframePayment iframePayment = new IframePayment(driver);
-        iframePayment.sumInFrameHeaderIsDisplayed();
-        iframePayment.sumInFrameButtonIsDisplayed();
-        iframePayment.phoneNumberHeaderIsDisplayed();
-        iframePayment.iconsContainerIsDisplayed();
 
+        warn("На следующей строке падает, если форма не успела прогрузится");
         assertEquals(iframePayment.getCardNumberFrameTextExpected(), iframePayment.readPlaceholderCardNumber());
         assertEquals(iframePayment.getValidityOfCardExpected(), iframePayment.readPlaceholdervalidityOfCard());
         assertEquals(iframePayment.getCvcOfCardExpected(), iframePayment.readPlaceholderCvcOfCard());

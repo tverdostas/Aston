@@ -6,10 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.base.BasePage;
 
-public class MtsHomePage extends BasePage {
+public class MtsHomePage extends BasePage<MtsHomePage> {
 
     public MtsHomePage(WebDriver driver) {
         super(driver);
+        this.pageUrl = "";
     }
 
     private final By cookieAgree = By.id("cookie-agree");
@@ -60,7 +61,7 @@ public class MtsHomePage extends BasePage {
         return this;
     }
 
-        public MtsHomePage findPhoneNumberField() {
+    public MtsHomePage findPhoneNumberField() {
         driver.findElement(phoneNumberField).click();
         return this;
     }
@@ -135,9 +136,11 @@ public class MtsHomePage extends BasePage {
     }
 
     @Step("Переключить фокус на модульное окно")
-    public void moveToFrame(){
+    public IframePayment moveToFrame() {
         WebElement frameElement = driver.findElement(iFramePayment);
         driver.switchTo().frame(frameElement);
+
+        return new IframePayment(driver);
     }
 
 

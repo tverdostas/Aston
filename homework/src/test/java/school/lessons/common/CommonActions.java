@@ -36,4 +36,14 @@ public class CommonActions {
     public static void closeDriver(WebDriver driver) {
         driver.quit();
     }
+
+    @Step("Внимание: {msg}")
+    public static void warn(String msg) {
+        System.out.println(msg);
+    }
+
+    @Step("Сообщение: {msg}")
+    public static void info(String msg) {
+        System.out.println(msg);
+    }
 }

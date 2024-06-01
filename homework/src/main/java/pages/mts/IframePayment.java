@@ -23,20 +23,24 @@ public class IframePayment extends BasePage {
 
    // странный xpath оставила, т.к. не нашла "за что зацепиться"
     private final By iconsContainer = By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div");
-    public void sumInFrameHeaderIsDisplayed() {
+    public IframePayment sumInFrameHeaderIsDisplayed() {
         driver.findElement(sumInFrameHeader).isDisplayed();
+        return this;
     }
 
-    public void sumInFrameButtonIsDisplayed() {
+    public IframePayment sumInFrameButtonIsDisplayed() {
         driver.findElement(sumInPaymentButtonIsDisplayed).isDisplayed();
+        return this;
     }
 
-    public void phoneNumberHeaderIsDisplayed() {
+    public IframePayment phoneNumberHeaderIsDisplayed() {
         driver.findElement(phoneNumberHeaderIsDisplayed).isDisplayed();
+        return this;
     }
 
-    public void iconsContainerIsDisplayed() {
+    public IframePayment iconsContainerIsDisplayed() {
         driver.findElement(iconsContainer).isDisplayed();
+        return this;
     }
 
     @Step("Получение плейсхолдера поля Номер карты")

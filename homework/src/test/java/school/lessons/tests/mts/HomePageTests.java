@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import pages.mts.MtsHomePage;
 import school.lessons.tests.base.BaseTest;
 
-import static constants.Constant.TimeoutVariable.Urls.MTS_HOME_PAGE;
+import static constants.Constant.Urls.MTS_HOME_PAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomePageTests extends BaseTest {
