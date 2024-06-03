@@ -61,7 +61,7 @@ public class IframePayment extends BasePage {
         return value;
     }
 
-    @Step("Получение плейсхолдера поля CVC карты")
+    @Step("Получение плейсхолдера поля держатель карты")
     public String readPlaceholderCardOwnerName() {
         String value = driver.findElement(cardOwner).getText();
         return value;
